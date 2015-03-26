@@ -9,6 +9,11 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 
+// The UISplitViewControllerDelegate protocol defines methods that allow you to manage changes to a split view interface.
+// Use the methods of this protocol to respond to changes in the current display mode and to the current interface orientation.
+// When the split view interface collapses and expands, or when a new view controller is added to the interface, you can
+// also use these methods to configure the child view controllers appropriately.
+//
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
 @end
@@ -17,11 +22,28 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-    splitViewController.delegate = self;
+    
+    // Log a trace message to the console.
+    //
+    NSLog(@"%%AppDelegate-I-TRACE, Instance method: application:didFinishLaunchingWithOptions.");
+
+    // Instantiate a container view controller that presents a master-detail interface.
+    //
+    UISplitViewController *splitVC = (UISplitViewController *)self.window.rootViewController;
+
+    // Return the navigation controller managed by the split-view controller.
+    //
+    UINavigationController *splitNC = [splitVC.viewControllers lastObject];
+    
+    // Set a custom bar button item, which changes the display mode of the split view controller,
+    // displayed on the left of the navigation bar when the receiver is the top navigation item.
+    //
+    splitNC.topViewController.navigationItem.leftBarButtonItem = splitVC.displayModeButtonItem;
+    
+    // Set the delegate to receive split view controller messages.
+    //
+    splitVC.delegate = self;
+    
     return YES;
 }
 
