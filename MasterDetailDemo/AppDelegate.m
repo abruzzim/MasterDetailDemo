@@ -25,7 +25,7 @@
     
     // Log a trace message to the console.
     //
-    NSLog(@"%%AppDelegate-I-TRACE, Instance method: application:didFinishLaunchingWithOptions.");
+    NSLog(@"%%AppDelegate-I-TRACE, application:didFinishLaunchingWithOptions:");
 
     // Instantiate a container view controller that presents a master-detail interface.
     //
@@ -71,8 +71,17 @@
 
 #pragma mark - Split view
 
-- (BOOL)splitViewController:(UISplitViewController *)splitViewController collapseSecondaryViewController:(UIViewController *)secondaryViewController ontoPrimaryViewController:(UIViewController *)primaryViewController {
-    if ([secondaryViewController isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] && ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
+- (BOOL)            splitViewController:(UISplitViewController *)splitViewController
+        collapseSecondaryViewController:(UIViewController *)secondaryViewController
+              ontoPrimaryViewController:(UIViewController *)primaryViewController {
+    
+    // Log a trace message to the console.
+    //
+    NSLog(@"%%AppDelegate-I-TRACE, splitViewController:collapseSecondaryViewController:ontoPrimaryViewController:");
+
+    if ([secondaryViewController isKindOfClass:[UINavigationController class]] &&
+        [[(UINavigationController *)secondaryViewController topViewController] isKindOfClass:[DetailViewController class]] &&
+        ([(DetailViewController *)[(UINavigationController *)secondaryViewController topViewController] detailItem] == nil)) {
         // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
         return YES;
     } else {
